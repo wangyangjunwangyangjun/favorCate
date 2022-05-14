@@ -4,7 +4,7 @@ import 'package:flutter/services.dart';
 
 import '../model/category_model.dart';
 
-class JsonParse {
+class HYJsonParse {
   static Future<List<HYCategoryModel>> getCategoryData() async{
     //1、加载json文件,loadString返回的类型是Future，所以是异步操作
     final jsonString = await rootBundle.loadString("assets/json/category.json");
