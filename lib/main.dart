@@ -1,4 +1,5 @@
 import 'package:favorcate/core/router/route.dart';
+import 'package:favorcate/core/viewmodel/filter_view_model.dart';
 import 'package:favorcate/ui/shared/app_theme.dart';
 import 'package:favorcate/ui/shared/size_fit.dart';
 import 'package:flutter/material.dart';
@@ -7,17 +8,31 @@ import 'core/viewmodel/favor_view_model.dart';
 import 'core/viewmodel/meal_view_model.dart';
 
 main() {
-  runApp(MultiProvider(
-    providers: [
-      ChangeNotifierProvider(
-        create: (ctx) => HYMealViewModel(),
-      ),
-      ChangeNotifierProvider(
-        create: (ctx) => HYFavorViewModel(),
-      ),
-    ],
-    child: MyApp(),
-  ));
+  runApp(
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(
+          create: (ctx) => HYFilterViewModel(),
+        ),
+        //HYMealViewModel 依赖 HYFilterViewModel
+        ChangeNotifierProxyProvider<HYFilterViewModel, HYMealViewModel>(
+          create: (ctx) => HYMealViewModel(),
+          update: (ctx, filterVM, mealVM) {
+            mealVM?.updateFilters(filterVM);
+            return mealVM as HYMealViewModel;
+          },
+        ),
+        ChangeNotifierProxyProvider<HYFilterViewModel, HYFavorViewModel>(
+          create: (ctx) => HYFavorViewModel(),
+          update: (ctx, filterVM, favorVM) {
+            favorVM?.updateFilters(filterVM);
+            return favorVM as HYFavorViewModel;
+          },
+        ),
+      ],
+      child: MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {

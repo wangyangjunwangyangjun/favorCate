@@ -1,17 +1,10 @@
-import 'package:favorcate/core/model/meal_model.dart';
 import 'package:favorcate/core/services/meal_request.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:favorcate/core/viewmodel/base_view_model.dart';
 
-class HYMealViewModel extends ChangeNotifier {
-  List<HYMealModel> _meals = [];
-
-
-  List<HYMealModel> get meals => _meals;
-
+class HYMealViewModel extends BaseMealViewModel {
   HYMealViewModel() {
-    HYMealRequest.getMealData().then((value) {
-      _meals = value;
-      notifyListeners();
+    HYMealRequest.getMealData().then((res) {
+      meals = res;
     });
   }
 }
