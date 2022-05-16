@@ -1,3 +1,4 @@
+import 'package:favorcate/ui/pages/favor/favor_content.dart';
 import 'package:flutter/material.dart';
 
 class HYFavorScreen extends StatelessWidget {
@@ -10,9 +11,7 @@ class HYFavorScreen extends StatelessWidget {
       appBar: AppBar(
         title: Text("我的收藏"),
       ),
-      body: Center(
-        child: Text("我的收藏"),
-      ),
+      body: HYFavorContent()
     );
   }
 }

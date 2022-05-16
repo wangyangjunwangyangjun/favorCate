@@ -2,13 +2,30 @@ import 'package:favorcate/core/router/route.dart';
 import 'package:favorcate/ui/shared/app_theme.dart';
 import 'package:favorcate/ui/shared/size_fit.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'core/viewmodel/favor_view_model.dart';
+import 'core/viewmodel/meal_view_model.dart';
 
-main() => runApp(MyApp());
+main() {
+  runApp(MultiProvider(
+    providers: [
+      ChangeNotifierProvider(
+        create: (ctx) => HYMealViewModel(),
+      ),
+      ChangeNotifierProvider(
+        create: (ctx) => HYFavorViewModel(),
+      ),
+    ],
+    child: MyApp(),
+  ));
+}
 
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    //对HYSizeFit进行初始化
     HYSizeFit.initialize();
+
     return MaterialApp(
       title: '美食广场',
 

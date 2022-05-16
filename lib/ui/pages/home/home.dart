@@ -11,7 +11,8 @@ class HYHomeScreen extends StatelessWidget {
       appBar: AppBar(
         title: Text("美食广场"),
       ),
-      body: HYHomeContent()
+      body: HYHomeContent(),
+      drawer: Drawer(),
     );
   }
 }
